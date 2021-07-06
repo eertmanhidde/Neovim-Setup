@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =0
+let g:netrw_dirhist_0='/Users/hiddeeertman'
+let g:netrw_dirhist_9='/Users/hiddeeertman/.gem'
+let g:netrw_dirhist_8='/Users/hiddeeertman/.config/yarn/link/@nerds-and-company'
+let g:netrw_dirhist_7='/Users/hiddeeertman/.config/yarn/link'
+let g:netrw_dirhist_6='/Users/hiddeeertman/sites/dpg-learning'
+let g:netrw_dirhist_5='/Users/hiddeeertman/sites/blocks'
+let g:netrw_dirhist_4='/Users/hiddeeertman/sites/valori-corporate-website'
+let g:netrw_dirhist_3='/Users/hiddeeertman/sites/valori-corporate-website/web'
+let g:netrw_dirhist_2='/Users/hiddeeertman/sites/valori-corporate-website'
+let g:netrw_dirhist_1='/Users/hiddeeertman/.config/nvim'
