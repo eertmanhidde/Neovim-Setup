@@ -21,22 +21,32 @@ set syntax
 set lazyredraw
 set ttyfast
 set relativenumber
+set completeopt=menuone,noinsert,noselect
 " SETS - END
 
 " PLUGIN - START
 call plug#begin('~/.vim/plugged')
+  " Language Server Protocol
+  Plug 'glepnir/lspsaga.nvim'
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+  " Autocompletion
+  Plug 'nvim-lua/completion-nvim'
+
   " colorscheme
-  Plug 'joshdick/onedark.vim'
+  Plug 'morhetz/gruvbox'
 
   " Navigation within tmux
   Plug 'christoomey/vim-tmux-navigator'
 
-  " for language servers
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
   " fuzzy File finder
-  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-  Plug 'junegunn/fzf.vim'
+  Plug 'nvim-lua/popup.nvim'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
+  Plug 'kyazdani42/nvim-web-devicons'
 
   Plug 'tpope/vim-rails'
 
@@ -85,16 +95,20 @@ call plug#begin('~/.vim/plugged')
 
   " deleting a buffer without closing the window
   Plug 'rbgrouleff/bclose.vim'
+
   Plug 'machakann/vim-highlightedyank'
-  Plug 'lifepillar/vim-solarized8'
+  " Plug 'lifepillar/vim-solarized8'
 
   " Lazygit integration
   Plug 'kdheepak/lazygit.nvim', { 'branch': 'nvim-v0.4.3' }
+
+  " A plugin for distraction free writing, it will center the text
+  Plug 'junegunn/goyo.vim'
 call plug#end()
 " PLUGIN - END
 
 syntax on
-colorscheme onedark
+colorscheme gruvbox
 
 " LETS
 let mapleader = " "
@@ -103,6 +117,7 @@ let g:user_emmet_expandabbr_key = '<Tab>'
 let g:NERDSpaceDelims = 1
 
 let g:lightline = {
+      \ 'colorscheme': 'gruvbox',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -110,17 +125,27 @@ let g:lightline = {
       \ 'component_function': {
       \   'gitbranch': 'gitbranch#name'
       \ },
+      \ 'mode_map': {
+        \ 'n' : 'N',
+        \ 'i' : 'I',
+        \ 'R' : 'R',
+        \ 'v' : 'V',
+        \ 'V' : 'VL',
+        \ "\<C-v>": 'VB',
+        \ 'c' : 'C',
+        \ 's' : 'S',
+        \ 'S' : 'SL',
+        \ "\<C-s>": 'SB',
+        \ 't': 'T',
+        \ },
       \ }
 
 " Make Ranger to be hidden after picking a file
 let g:rnvimr_enable_picker = 1
 let g:highlightedyank_highlight_duration = 150
-" REMAPS - START
-nnoremap <leader>ff :GFiles<CR>
-" Convert variables on current line from CamelCase to kebab-case
-nnoremap <leader>kc :s#\(\<\u\l\+\|\l\+\)\(\u\)#\l\1-\l\2#g
-nnoremap <leader>bb :Buffers<CR>
-nnoremap <leader>F :Ag<CR>
+
+" REMAPS - NORMAL MODE - START
+nnoremap <silent>K :Lspsaga hover_doc<CR>
 nnoremap <leader>fs :w<CR>
 nnoremap <leader>L :! gh pr view --web<CR>
 nnoremap <leader>fm :RnvimrToggle<CR>
@@ -131,9 +156,17 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap H gT
 nnoremap L gt
+nnoremap <leader>erb i<%=  %><esc>hhi
+nnoremap <leader>cen :Goyo<CR>
+" REMAPS - NORMAL MODE - END
+
+" REMAPS - VISUAL MODE - START
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
+" REMAPS - VISUAL MODE - END
+"
+" REMAPS - INSERT MODE - START
 inoremap jj <ESC>
-" REMAPS - END
+" REMAPS - INSERT MODE - END
 
 " prettier
 command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
