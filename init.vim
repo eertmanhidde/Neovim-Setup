@@ -29,7 +29,7 @@ call plug#begin('~/.vim/plugged')
   " Language Server Protocol
   Plug 'glepnir/lspsaga.nvim'
   Plug 'neovim/nvim-lspconfig'
-  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  " Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -100,7 +100,7 @@ call plug#begin('~/.vim/plugged')
   " Plug 'lifepillar/vim-solarized8'
 
   " Lazygit integration
-  Plug 'kdheepak/lazygit.nvim', { 'branch': 'nvim-v0.4.3' }
+  Plug 'kdheepak/lazygit.nvim'
 
   " A plugin for distraction free writing, it will center the text
   Plug 'junegunn/goyo.vim'
