@@ -17,8 +17,10 @@ require'nvim-treesitter.configs'.setup {
     "json",
     "html",
     "scss",
+    "javascript",
     "vue",
-    "ruby"
+    "ruby",
+    "svelte"
   },
 }
 

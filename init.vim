@@ -27,17 +27,15 @@ set completeopt=menuone,noinsert,noselect
 " PLUGIN - START
 call plug#begin('~/.vim/plugged')
   " Language Server Protocol
-  Plug 'glepnir/lspsaga.nvim'
   Plug 'neovim/nvim-lspconfig'
-  " Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'glepnir/lspsaga.nvim'
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
   " Autocompletion
   Plug 'nvim-lua/completion-nvim'
 
   " colorscheme
-  Plug 'morhetz/gruvbox'
+  Plug 'Pocco81/Catppuccino.nvim'
 
   " Navigation within tmux
   Plug 'christoomey/vim-tmux-navigator'
@@ -46,17 +44,10 @@ call plug#begin('~/.vim/plugged')
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
-  Plug 'kyazdani42/nvim-web-devicons'
 
   Plug 'tpope/vim-rails'
 
   Plug 'itchyny/vim-gitbranch'
-
-  " For svelte support
-  Plug 'evanleck/vim-svelte', {'branch': 'main'}
-
-  " Twig
-  Plug 'nelsyeung/twig.vim'
 
   " emmet snippets
   Plug 'mattn/emmet-vim'
@@ -96,19 +87,18 @@ call plug#begin('~/.vim/plugged')
   " deleting a buffer without closing the window
   Plug 'rbgrouleff/bclose.vim'
 
+  " Highlight yanked area
   Plug 'machakann/vim-highlightedyank'
-  " Plug 'lifepillar/vim-solarized8'
 
   " Lazygit integration
   Plug 'kdheepak/lazygit.nvim'
-
-  " A plugin for distraction free writing, it will center the text
-  Plug 'junegunn/goyo.vim'
+  Plug 'kyazdani42/nvim-web-devicons'
+  Plug 'ryanoasis/vim-devicons'
 call plug#end()
 " PLUGIN - END
 
 syntax on
-colorscheme gruvbox
+colorscheme catppuccino
 
 " LETS
 let mapleader = " "
@@ -117,7 +107,7 @@ let g:user_emmet_expandabbr_key = '<Tab>'
 let g:NERDSpaceDelims = 1
 
 let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
+      \ 'colorscheme': 'catppuccino',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -147,6 +137,7 @@ let g:highlightedyank_highlight_duration = 150
 " REMAPS - NORMAL MODE - START
 nnoremap <silent>K :Lspsaga hover_doc<CR>
 nnoremap <leader>fs :w<CR>
+nnoremap <leader>qa :tabonly<CR>
 nnoremap <leader>L :! gh pr view --web<CR>
 nnoremap <leader>fm :RnvimrToggle<CR>
 nnoremap <silent> <leader>lg :LazyGit<CR>
