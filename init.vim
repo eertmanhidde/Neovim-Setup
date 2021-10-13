@@ -27,9 +27,11 @@ set completeopt=menuone,noinsert,noselect
 " PLUGIN - START
 call plug#begin('~/.vim/plugged')
   " Language Server Protocol
-  Plug 'neovim/nvim-lspconfig'
+  " Plug 'neovim/nvim-lspconfig'
   Plug 'glepnir/lspsaga.nvim'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
   " Autocompletion
   Plug 'nvim-lua/completion-nvim'
@@ -137,6 +139,7 @@ let g:highlightedyank_highlight_duration = 150
 " REMAPS - NORMAL MODE - START
 nnoremap <silent>K :Lspsaga hover_doc<CR>
 nnoremap <leader>fs :w<CR>
+nnoremap <leader>qv :q<CR>
 nnoremap <leader>qa :tabonly<CR>
 nnoremap <leader>L :! gh pr view --web<CR>
 nnoremap <leader>fm :RnvimrToggle<CR>
@@ -149,16 +152,19 @@ nnoremap H gT
 nnoremap L gt
 nnoremap <leader>erb i<%=  %><esc>hhi
 nnoremap <leader>cen :Goyo<CR>
-" REMAPS - NORMAL MODE - END
+" Console log from normal mode, inserted on next line with word your on inside parentheses
+nmap cll yiwocll<Esc>pF(a'<Esc>lyiwea', <Esc>p<Esc>
 
+" REMAPS - NORMAL MODE - END
 " REMAPS - VISUAL MODE - START
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 " REMAPS - VISUAL MODE - END
 "
 " REMAPS - INSERT MODE - START
 inoremap jj <ESC>
+" Console log from insert mode; Puts focus inside parentheses
+imap cll console.log('');<Esc>hhi
 " REMAPS - INSERT MODE - END
-
 " prettier
 command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 
