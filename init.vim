@@ -22,19 +22,23 @@ set lazyredraw
 set ttyfast
 set relativenumber
 set completeopt=menuone,noinsert,noselect
+set wildignore=*/node_modules/
 " SETS - END
 
 " PLUGIN - START
 call plug#begin('~/.vim/plugged')
   " Language Server Protocol
-  " Plug 'neovim/nvim-lspconfig'
-  Plug 'glepnir/lspsaga.nvim'
+  Plug 'neovim/nvim-lspconfig'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
   " Autocompletion
-  Plug 'nvim-lua/completion-nvim'
+  Plug 'hrsh7th/nvim-cmp'
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'saadparwaiz1/cmp_luasnip'
+  Plug 'L3MON4D3/LuaSnip'
+
+  " Plug 'rstacruz/vim-closer'
+  Plug 'jiangmiao/auto-pairs'
 
   " colorscheme
   Plug 'Pocco81/Catppuccino.nvim'
@@ -47,9 +51,10 @@ call plug#begin('~/.vim/plugged')
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
 
-  Plug 'tpope/vim-rails'
-
   Plug 'itchyny/vim-gitbranch'
+
+  " Plugin for showing changed lines, similiar to gitgutter
+  Plug 'mhinz/vim-signify'
 
   " emmet snippets
   Plug 'mattn/emmet-vim'
@@ -58,7 +63,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'AndrewRadev/tagalong.vim'
 
   " linting
-  Plug 'editorconfig/editorconfig-vim'
+  " Plug 'editorconfig/editorconfig-vim'
 
   " for sending all my information to Bill Gates
   Plug 'wakatime/vim-wakatime'
@@ -79,9 +84,6 @@ call plug#begin('~/.vim/plugged')
   " camelCase)
   Plug 'tpope/vim-abolish'
 
-  " github stuff
-  Plug 'airblade/vim-gitgutter'
-
   " ranger is a file manager
   Plug 'francoiscabrol/ranger.vim'
   Plug 'kevinhwang91/rnvimr'
@@ -94,8 +96,9 @@ call plug#begin('~/.vim/plugged')
 
   " Lazygit integration
   Plug 'kdheepak/lazygit.nvim'
-  Plug 'kyazdani42/nvim-web-devicons'
-  Plug 'ryanoasis/vim-devicons'
+
+  " Twig
+  Plug 'nelsyeung/twig.vim'
 call plug#end()
 " PLUGIN - END
 
