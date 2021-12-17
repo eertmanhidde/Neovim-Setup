@@ -1,3 +1,6 @@
+" Disable this
+finish
+
 if !exists('g:lspconfig')
   finish
 endif

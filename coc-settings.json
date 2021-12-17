@@ -1,3 +1,11 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": ["css", "Markdown", "vue", "js", "ts", "html"]
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "Markdown",
+    "vue",
+    "js",
+    "ts",
+    "html"
+  ],
+  "svelte.enable-ts-plugin": true
 }

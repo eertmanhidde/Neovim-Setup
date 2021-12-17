@@ -28,17 +28,8 @@ set wildignore=*/node_modules/
 " PLUGIN - START
 call plug#begin('~/.vim/plugged')
   " Language Server Protocol
-  Plug 'neovim/nvim-lspconfig'
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-
-  " Autocompletion
-  Plug 'hrsh7th/nvim-cmp'
-  Plug 'hrsh7th/cmp-nvim-lsp'
-  Plug 'saadparwaiz1/cmp_luasnip'
-  Plug 'L3MON4D3/LuaSnip'
-
-  " Plug 'rstacruz/vim-closer'
-  Plug 'jiangmiao/auto-pairs'
 
   " colorscheme
   Plug 'Pocco81/Catppuccino.nvim'
@@ -51,9 +42,14 @@ call plug#begin('~/.vim/plugged')
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
 
+  " Mah awesome colorscheme
+  Plug 'tomasiser/vim-code-dark'
+
+  " Provides the branch name for lightline
   Plug 'itchyny/vim-gitbranch'
 
-  " Plugin for showing changed lines, similiar to gitgutter
+  " Plugin for showing changed lines, similiar to gitgutter but performing
+  " faster
   Plug 'mhinz/vim-signify'
 
   " emmet snippets
@@ -62,12 +58,6 @@ call plug#begin('~/.vim/plugged')
   " for updating the closing tag when editing an open tag
   Plug 'AndrewRadev/tagalong.vim'
 
-  " linting
-  " Plug 'editorconfig/editorconfig-vim'
-
-  " for sending all my information to Bill Gates
-  Plug 'wakatime/vim-wakatime'
-
   " stylizes the status line at the bottom
   Plug 'itchyny/lightline.vim'
 
@@ -75,7 +65,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'itchyny/vim-cursorword'
 
   " for commenting
-  Plug 'preservim/nerdcommenter'
+  Plug 'numToStr/Comment.nvim'
 
   " for changing stuff thats wrapped in something
   Plug 'tpope/vim-surround'
@@ -83,6 +73,9 @@ call plug#begin('~/.vim/plugged')
   " This plugins is for converting cases to other cases (eg. kebab-case to
   " camelCase)
   Plug 'tpope/vim-abolish'
+
+  " Plugin for running tests with VIM
+  Plug 'vim-test/vim-test'
 
   " ranger is a file manager
   Plug 'francoiscabrol/ranger.vim'
@@ -99,20 +92,29 @@ call plug#begin('~/.vim/plugged')
 
   " Twig
   Plug 'nelsyeung/twig.vim'
+
+  " Jump to text searches
+  Plug 'justinmk/vim-sneak'
 call plug#end()
 " PLUGIN - END
 
 syntax on
-colorscheme catppuccino
+colorscheme codedark
 
-" LETS
+" ----------------- Lets - START -------------------
+
+" When navigating with sneak make use of labels, similiar to "f" in Vimium
+let g:sneak#label = 1
+" Space is leader
 let mapleader = " "
-let NERDTreeMapOpenInTab='\r'
+" Use Emmet with tab
 let g:user_emmet_expandabbr_key = '<Tab>'
-let g:NERDSpaceDelims = 1
+" Set default Javascript test runner to Jest for vim-test
+let g:test#javascript#runner = 'jest'
 
+" Lightline configuration
 let g:lightline = {
-      \ 'colorscheme': 'catppuccino',
+      \ 'colorscheme': 'codedark',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -139,37 +141,54 @@ let g:lightline = {
 let g:rnvimr_enable_picker = 1
 let g:highlightedyank_highlight_duration = 150
 
-" REMAPS - NORMAL MODE - START
-nnoremap <silent>K :Lspsaga hover_doc<CR>
+" --------------------- Lets - END ------------------------
+
+
+
+" --------------------- REMAPS - NORMAL MODE - START ---------------------
+
+" Saving a file
 nnoremap <leader>fs :w<CR>
-nnoremap <leader>qv :q<CR>
+" Close all tabs except current tab
 nnoremap <leader>qa :tabonly<CR>
-nnoremap <leader>L :! gh pr view --web<CR>
+" Opens Ranger
 nnoremap <leader>fm :RnvimrToggle<CR>
+" Test the current file with vim-test
+nnoremap <leader>tf :TestFile<CR>
+" Test the nearest spec with vim-test
+nnoremap <leader>tn :TestNearest<CR>
+" Opens LazyGit
 nnoremap <silent> <leader>lg :LazyGit<CR>
+" Bindings for navigating
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap H gT
 nnoremap L gt
+" Creates erb brackets because I love ERB <3
 nnoremap <leader>erb i<%=  %><esc>hhi
 nnoremap <leader>cen :Goyo<CR>
-" Console log from normal mode, inserted on next line with word your on inside parentheses
-nmap cll yiwocll<Esc>pF(a'<Esc>lyiwea', <Esc>p<Esc>
 
-" REMAPS - NORMAL MODE - END
-" REMAPS - VISUAL MODE - START
+" ---------------------- REMAPS - NORMAL MODE - END ------------------------
+
+
+
+" ---------------------- REMAPS - VISUAL MODE - START ----------------------
+
+" Allows you to grep and replace the current visually selected content
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
-" REMAPS - VISUAL MODE - END
-"
-" REMAPS - INSERT MODE - START
+
+" ---------------------- REMAPS - VISUAL MODE - END ------------------------
+
+
+
+" ---------------------- REMAPS - INSERT MODE - START ----------------------
+
+" Escape insert mode with "jj" because that's what superior people do
 inoremap jj <ESC>
-" Console log from insert mode; Puts focus inside parentheses
-imap cll console.log('');<Esc>hhi
-" REMAPS - INSERT MODE - END
-" prettier
-command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
+
+" ---------------------- REMAPS - INSERT MODE - END ------------------------
 
 " FUNCTIONS
 fun! TrimWhiteSpace()
