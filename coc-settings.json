@@ -5,7 +5,10 @@
     "vue",
     "js",
     "ts",
-    "html"
+    "html",
+    "dart"
   ],
-  "svelte.enable-ts-plugin": true
+  "svelte.enable-ts-plugin": true,
+  "flutter.sdk.flutter-lookup": "asdf which flutter",
+  "flutter.sdk.dart-lookup": "asdf which dart"
 }

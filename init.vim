@@ -27,20 +27,28 @@ set wildignore=*/node_modules/
 
 " PLUGIN - START
 call plug#begin('~/.vim/plugged')
+  " A plugin for visualising indented lines
+  Plug 'Yggdroot/indentLine'
+
   " Language Server Protocol
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-
-  " colorscheme
-  Plug 'Pocco81/Catppuccino.nvim'
+  " Plug 'neovim/nvim-lspconfig'
 
   " Navigation within tmux
   Plug 'christoomey/vim-tmux-navigator'
 
-  " fuzzy File finder
+  " Fuzzy File finder
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
+  Plug 'nvim-telescope/telescope-file-browser.nvim'
+
+  " Icons for telescope
+  Plug 'kyazdani42/nvim-web-devicons'
+
+  " file manager
+  Plug 'luukvbaal/nnn.nvim'
 
   " Mah awesome colorscheme
   Plug 'tomasiser/vim-code-dark'
@@ -78,11 +86,11 @@ call plug#begin('~/.vim/plugged')
   Plug 'vim-test/vim-test'
 
   " ranger is a file manager
-  Plug 'francoiscabrol/ranger.vim'
   Plug 'kevinhwang91/rnvimr'
 
   " deleting a buffer without closing the window
   Plug 'rbgrouleff/bclose.vim'
+  Plug 'francoiscabrol/ranger.vim'
 
   " Highlight yanked area
   Plug 'machakann/vim-highlightedyank'
@@ -95,6 +103,12 @@ call plug#begin('~/.vim/plugged')
 
   " Jump to text searches
   Plug 'justinmk/vim-sneak'
+
+  " Flutter stuf
+  " Plug 'natebosch/vim-lsc'
+  " Plug 'natebosch/vim-lsc-dart'
+  Plug 'dart-lang/dart-vim-plugin'
+  Plug 'thosakwe/vim-flutter'
 call plug#end()
 " PLUGIN - END
 
@@ -152,11 +166,14 @@ nnoremap <leader>fs :w<CR>
 " Close all tabs except current tab
 nnoremap <leader>qa :tabonly<CR>
 " Opens Ranger
-nnoremap <leader>fm :RnvimrToggle<CR>
+nnoremap <leader>fm :NnnPicker<CR>
+" Opens Coc actions
+nnoremap <leader>ca :CocAction<CR>
 " Test the current file with vim-test
 nnoremap <leader>tf :TestFile<CR>
 " Test the nearest spec with vim-test
 nnoremap <leader>tn :TestNearest<CR>
+nnoremap <leader>gb :BlamerToggle<CR>
 " Opens LazyGit
 nnoremap <silent> <leader>lg :LazyGit<CR>
 " Bindings for navigating
@@ -168,7 +185,9 @@ nnoremap H gT
 nnoremap L gt
 " Creates erb brackets because I love ERB <3
 nnoremap <leader>erb i<%=  %><esc>hhi
-nnoremap <leader>cen :Goyo<CR>
+
+" Refresh Widgetbook
+nnoremap <silent> <leader>fr :silent !tmux send-keys -t spotta:widgetbook r Enter<CR>
 
 " ---------------------- REMAPS - NORMAL MODE - END ------------------------
 
@@ -197,30 +216,14 @@ fun! TrimWhiteSpace()
   call winrestview(l:save)
 endfun
 
-function! NERDCommenter_before()
-  let g:ft = ''
-  if &ft == 'vue'
-    g:ft = 'vue'
-    let stack = synstack(line('.'), col('.'))
-    if len(stack) > 0
-      let syn = synIDattr((stack)[0], 'name')
-      if len(syn) > 0
-        exe 'setf ' . substitute(tolower(syn), '^vue_', '', '')
-      endif
-    endif
-  endif
-endfunction
-
-function! NERDCommenter_after()
-  if g:ft == 'vue'
-    setf vue
-    let g:ft = ''
-  endif
-endfunction
-
 " AUTOGROUPS
 augroup HIDDE_IS_COOL
   autocmd!
   autocmd BufWritePre * :call TrimWhiteSpace()
 augroup END
 
+
+
+lua << EOF
+require("nnn").setup()
+EOF

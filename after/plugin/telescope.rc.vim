@@ -1,6 +1,6 @@
 if !exists('g:loaded_telescope') | finish | endif
 
-nnoremap <leader>ff :Telescope find_files<CR>
+nnoremap <leader>ff :Telescope find_files prompt_prefix=🔍\ <CR>
 nnoremap <leader>bb :Telescope buffers<CR>
 nnoremap <leader>F :Telescope live_grep<CR>
 
@@ -25,6 +25,6 @@ require('telescope').setup{
     },
   }
 }
+
+require('telescope').load_extension "file_browser"
 EOF
-
-
