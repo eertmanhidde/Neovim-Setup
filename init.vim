@@ -31,9 +31,13 @@ call plug#begin('~/.vim/plugged')
   Plug 'Yggdroot/indentLine'
 
   " Language Server Protocol
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  " Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-  " Plug 'neovim/nvim-lspconfig'
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'hrsh7th/nvim-cmp'
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'saadparwaiz1/cmp_luasnip'
+  Plug 'L3MON4D3/LuaSnip'
 
   " Navigation within tmux
   Plug 'christoomey/vim-tmux-navigator'
@@ -85,12 +89,8 @@ call plug#begin('~/.vim/plugged')
   " Plugin for running tests with VIM
   Plug 'vim-test/vim-test'
 
-  " ranger is a file manager
-  Plug 'kevinhwang91/rnvimr'
-
   " deleting a buffer without closing the window
   Plug 'rbgrouleff/bclose.vim'
-  Plug 'francoiscabrol/ranger.vim'
 
   " Highlight yanked area
   Plug 'machakann/vim-highlightedyank'
@@ -101,14 +101,19 @@ call plug#begin('~/.vim/plugged')
   " Twig
   Plug 'nelsyeung/twig.vim'
 
-  " Jump to text searches
-  Plug 'justinmk/vim-sneak'
+  " Jump through files like a maniac!!
+  Plug 'phaazon/hop.nvim'
+
+  " Snippets!
+  Plug 'hrsh7th/vim-vsnip'
+  Plug 'hrsh7th/vim-vsnip-integ'
 
   " Flutter stuf
-  " Plug 'natebosch/vim-lsc'
-  " Plug 'natebosch/vim-lsc-dart'
-  Plug 'dart-lang/dart-vim-plugin'
-  Plug 'thosakwe/vim-flutter'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'akinsho/flutter-tools.nvim'
+
+  " Gotta send my data to Bill Gates!
+  Plug 'wakatime/vim-wakatime'
 call plug#end()
 " PLUGIN - END
 
@@ -117,14 +122,16 @@ colorscheme codedark
 
 " ----------------- Lets - START -------------------
 
-" When navigating with sneak make use of labels, similiar to "f" in Vimium
-let g:sneak#label = 1
+
 " Space is leader
 let mapleader = " "
 " Use Emmet with tab
 let g:user_emmet_expandabbr_key = '<Tab>'
 " Set default Javascript test runner to Jest for vim-test
 let g:test#javascript#runner = 'jest'
+" Will ensure that the window wont close with every key press
+let g:test#neovim#start_normal = 1 " If using neovim strategy
+let g:test#basic#start_normal = 1 " If using basic strategy
 
 " Lightline configuration
 let g:lightline = {
@@ -151,8 +158,6 @@ let g:lightline = {
         \ },
       \ }
 
-" Make Ranger to be hidden after picking a file
-let g:rnvimr_enable_picker = 1
 let g:highlightedyank_highlight_duration = 150
 
 " --------------------- Lets - END ------------------------
@@ -165,8 +170,8 @@ let g:highlightedyank_highlight_duration = 150
 nnoremap <leader>fs :w<CR>
 " Close all tabs except current tab
 nnoremap <leader>qa :tabonly<CR>
-" Opens Ranger
-nnoremap <leader>fm :NnnPicker<CR>
+" Opens NNN
+nnoremap <leader>fm :NnnPicker %:p:h<CR>
 " Opens Coc actions
 nnoremap <leader>ca :CocAction<CR>
 " Test the current file with vim-test
@@ -222,8 +227,3 @@ augroup HIDDE_IS_COOL
   autocmd BufWritePre * :call TrimWhiteSpace()
 augroup END
 
-
-
-lua << EOF
-require("nnn").setup()
-EOF

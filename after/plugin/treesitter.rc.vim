@@ -20,7 +20,8 @@ require'nvim-treesitter.configs'.setup {
     "javascript",
     "vue",
     "ruby",
-    "svelte"
+    "svelte",
+    "dart"
   },
 }
 EOF
