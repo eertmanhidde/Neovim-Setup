@@ -39,6 +39,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'saadparwaiz1/cmp_luasnip'
   Plug 'L3MON4D3/LuaSnip'
 
+  " Auto pairs
+  Plug 'windwp/nvim-autopairs'
+
   " Navigation within tmux
   Plug 'christoomey/vim-tmux-navigator'
 
@@ -109,7 +112,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'hrsh7th/vim-vsnip-integ'
 
   " Flutter stuf
-  Plug 'nvim-lua/plenary.nvim'
   Plug 'akinsho/flutter-tools.nvim'
 
   " Gotta send my data to Bill Gates!
@@ -172,8 +174,6 @@ nnoremap <leader>fs :w<CR>
 nnoremap <leader>qa :tabonly<CR>
 " Opens NNN
 nnoremap <leader>fm :NnnPicker %:p:h<CR>
-" Opens Coc actions
-nnoremap <leader>ca :CocAction<CR>
 " Test the current file with vim-test
 nnoremap <leader>tf :TestFile<CR>
 " Test the nearest spec with vim-test

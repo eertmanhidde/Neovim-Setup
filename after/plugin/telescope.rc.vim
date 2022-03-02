@@ -3,6 +3,7 @@ if !exists('g:loaded_telescope') | finish | endif
 nnoremap <leader>ff :Telescope find_files prompt_prefix=🔍\ <CR>
 nnoremap <leader>bb :Telescope buffers<CR>
 nnoremap <leader>F :Telescope live_grep<CR>
+nnoremap <leader>ca :lua require'telescope.builtin'.lsp_code_actions{}<CR>
 
 lua << EOF
 local actions = require('telescope.actions')
