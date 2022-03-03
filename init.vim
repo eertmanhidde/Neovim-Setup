@@ -101,6 +101,10 @@ call plug#begin('~/.vim/plugged')
   " Lazygit integration
   Plug 'kdheepak/lazygit.nvim'
 
+  " Fugitive, a plugin to commmunicate with Git
+  " Made by the one and only Tpope himself
+  Plug 'tpope/vim-fugitive'
+
   " Twig
   Plug 'nelsyeung/twig.vim'
 
