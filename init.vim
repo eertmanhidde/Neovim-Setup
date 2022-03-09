@@ -34,8 +34,11 @@ call plug#begin('~/.vim/plugged')
   " Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'neovim/nvim-lspconfig'
-  Plug 'hrsh7th/nvim-cmp'
   Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-buffer'
+  Plug 'hrsh7th/cmp-path'
+  Plug 'hrsh7th/cmp-cmdline'
+  Plug 'hrsh7th/nvim-cmp'
   Plug 'saadparwaiz1/cmp_luasnip'
   Plug 'L3MON4D3/LuaSnip'
 
@@ -182,7 +185,6 @@ nnoremap <leader>fm :NnnPicker %:p:h<CR>
 nnoremap <leader>tf :TestFile<CR>
 " Test the nearest spec with vim-test
 nnoremap <leader>tn :TestNearest<CR>
-nnoremap <leader>gb :BlamerToggle<CR>
 " Opens LazyGit
 nnoremap <silent> <leader>lg :LazyGit<CR>
 " Bindings for navigating

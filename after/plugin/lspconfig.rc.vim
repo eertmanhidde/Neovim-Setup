@@ -56,7 +56,7 @@ require("flutter-tools").setup {
   flutter_path = '/usr/local/bin/flutter',
   lsp = {
     on_attach = on_attach,
-    -- capabilities = capabilities -- e.g. lsp_status capabilities
+    capabilities = capabilities -- e.g. lsp_status capabilities
   }
 }
 
@@ -122,9 +122,9 @@ lspconfig.diagnosticls.setup {
 
 -- luasnip setup
 local luasnip = require 'luasnip'
-
 -- nvim-cmp setup
 local cmp = require 'cmp'
+
 cmp.setup {
   snippet = {
     expand = function(args)
