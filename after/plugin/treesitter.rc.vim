@@ -21,7 +21,8 @@ require'nvim-treesitter.configs'.setup {
     "vue",
     "ruby",
     "svelte",
-    "dart"
+    "dart",
+    "astro"
   },
 }
 EOF

@@ -44,7 +44,7 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 local lspconfig = require('lspconfig')
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = { 'vuels' }
+local servers = { 'vuels', 'gopls' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
@@ -62,6 +62,7 @@ require("flutter-tools").setup {
 
 lspconfig.diagnosticls.setup {
   on_attach = on_attach,
+  capabilities = capabilities,
   filetypes = { 'javascript', 'javascriptreact', 'vue', 'json', 'typescript', 'typescriptreact', 'css', 'less', 'scss', 'markdown', 'pandoc' },
   init_options = {
     linters = {

@@ -24,7 +24,6 @@ set relativenumber
 set completeopt=menuone,noinsert,noselect
 set wildignore=*/node_modules/
 " SETS - END
-
 " PLUGIN - START
 call plug#begin('~/.vim/plugged')
   " A plugin for visualising indented lines
@@ -61,7 +60,10 @@ call plug#begin('~/.vim/plugged')
   Plug 'luukvbaal/nnn.nvim'
 
   " Mah awesome colorscheme
-  Plug 'tomasiser/vim-code-dark'
+  Plug 'bluz71/vim-moonfly-colors'
+
+  " Start screen
+  Plug 'goolord/alpha-nvim'
 
   " Provides the branch name for lightline
   Plug 'itchyny/vim-gitbranch'
@@ -121,13 +123,15 @@ call plug#begin('~/.vim/plugged')
   " Flutter stuf
   Plug 'akinsho/flutter-tools.nvim'
 
-  " Gotta send my data to Bill Gates!
-  Plug 'wakatime/vim-wakatime'
+  " O O O Octoooo
+  Plug 'pwntester/octo.nvim'
 call plug#end()
 " PLUGIN - END
 
 syntax on
-colorscheme codedark
+colorscheme moonfly
+
+highlight HighlightedyankRegion cterm=reverse gui=reverse
 
 " ----------------- Lets - START -------------------
 
@@ -136,15 +140,13 @@ colorscheme codedark
 let mapleader = " "
 " Use Emmet with tab
 let g:user_emmet_expandabbr_key = '<Tab>'
+let g:user_emmet_mode='i' " Only use Emmet in insert mode
 " Set default Javascript test runner to Jest for vim-test
 let g:test#javascript#runner = 'jest'
-" Will ensure that the window wont close with every key press
-let g:test#neovim#start_normal = 1 " If using neovim strategy
-let g:test#basic#start_normal = 1 " If using basic strategy
 
 " Lightline configuration
 let g:lightline = {
-      \ 'colorscheme': 'codedark',
+      \ 'colorscheme': 'moonfly',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -177,6 +179,10 @@ let g:highlightedyank_highlight_duration = 150
 
 " Saving a file
 nnoremap <leader>fs :w<CR>
+" Open terminal
+nnoremap <leader>tm :ter<CR>
+" Closes the current buffer!
+nnoremap <leader>bd :bd!<CR>
 " Close all tabs except current tab
 nnoremap <leader>qa :tabonly<CR>
 " Opens NNN
