@@ -1,3 +1,6 @@
+" FOLLOW THA LEADER LEADER LEADER, FOLLOW THA LEADER!
+let mapleader = " "
+
 " SETS - START
 set tabstop=2 softtabstop=2
 set shiftwidth=2
@@ -15,7 +18,6 @@ set scrolloff=8
 set cursorline
 set signcolumn=yes
 set switchbuf=usetab
-set listchars=tab:\|\
 set list
 set syntax
 set lazyredraw
@@ -129,8 +131,6 @@ highlight HighlightedyankRegion cterm=reverse gui=reverse
 " ----------------- Lets - START -------------------
 
 
-" Space is leader
-let mapleader = " "
 " Use Emmet with tab
 let g:user_emmet_expandabbr_key = '<Tab>'
 
@@ -194,6 +194,7 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap H gT
 nnoremap L gt
+nnoremap <leader>tn :tabnew<CR>
 " Creates erb brackets because I love ERB <3
 nnoremap <leader>erb i<%=  %><esc>hhi
 
