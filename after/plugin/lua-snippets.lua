@@ -20,6 +20,8 @@ ls.add_snippets("markdown", {
 	s("changelog", {
     t("- "), t("["), i(1, "FEATURE"), t("] "), i(2, "TEXT"), t(" ["), i(3, "Hidde Eertman"), t("]["), i(4, "hidde"), t("](https://github.com/nerds-and-company/"), i(5, "blocks/pulls/NUMBER"), t(")")
 	}),
+
+  s("checkbox", fmt('- [ ] {}', { i(1) })),
 })
 
 ls.add_snippets("all", {
@@ -43,9 +45,7 @@ ls.add_snippets("all", {
 
   -- Console.log
   s("cl", fmt("console.log({});", {
-    f(function(_, snip)
-      return snip.env.TM_SELECTED_TEXT[1] or {}
-    end, {0}),
+    i(1)
   })),
 
   -- CSS varify something!

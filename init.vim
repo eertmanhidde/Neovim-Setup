@@ -27,7 +27,7 @@ set wildignore=*/node_modules/
 " PLUGIN - START
 call plug#begin('~/.vim/plugged')
   " A plugin for visualising indented lines
-  Plug 'Yggdroot/indentLine'
+  Plug 'lukas-reineke/indent-blankline.nvim'
 
   " Language Server Protocol
   " Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -41,7 +41,11 @@ call plug#begin('~/.vim/plugged')
   Plug 'saadparwaiz1/cmp_luasnip'
   Plug 'L3MON4D3/LuaSnip'
 
-  " Auto pairs
+  " Debugger
+  Plug 'mfussenegger/nvim-dap'
+
+  " Auto pairs, example: automatically create a closing curly brace
+  " when creating an opening curly brace
   Plug 'windwp/nvim-autopairs'
 
   " Navigation within tmux
@@ -60,10 +64,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'luukvbaal/nnn.nvim'
 
   " Mah awesome colorscheme
+  Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
   Plug 'bluz71/vim-moonfly-colors'
-
-  " Start screen
-  Plug 'goolord/alpha-nvim'
 
   " Provides the branch name for lightline
   Plug 'itchyny/vim-gitbranch'
@@ -97,9 +99,6 @@ call plug#begin('~/.vim/plugged')
   " Plugin for running tests with VIM
   Plug 'vim-test/vim-test'
 
-  " deleting a buffer without closing the window
-  Plug 'rbgrouleff/bclose.vim'
-
   " Highlight yanked area
   Plug 'machakann/vim-highlightedyank'
 
@@ -113,23 +112,17 @@ call plug#begin('~/.vim/plugged')
   " Twig
   Plug 'nelsyeung/twig.vim'
 
-  " Jump through files like a maniac!!
-  Plug 'phaazon/hop.nvim'
-
   " Snippets!
   Plug 'hrsh7th/vim-vsnip'
   Plug 'hrsh7th/vim-vsnip-integ'
 
   " Flutter stuf
   Plug 'akinsho/flutter-tools.nvim'
-
-  " O O O Octoooo
-  Plug 'pwntester/octo.nvim'
 call plug#end()
 " PLUGIN - END
 
 syntax on
-colorscheme moonfly
+colorscheme tokyonight-night
 
 highlight HighlightedyankRegion cterm=reverse gui=reverse
 
@@ -140,6 +133,7 @@ highlight HighlightedyankRegion cterm=reverse gui=reverse
 let mapleader = " "
 " Use Emmet with tab
 let g:user_emmet_expandabbr_key = '<Tab>'
+
 let g:user_emmet_mode='i' " Only use Emmet in insert mode
 " Set default Javascript test runner to Jest for vim-test
 let g:test#javascript#runner = 'jest'
@@ -181,8 +175,8 @@ let g:highlightedyank_highlight_duration = 150
 nnoremap <leader>fs :w<CR>
 " Open terminal
 nnoremap <leader>tm :ter<CR>
-" Closes the current buffer!
-nnoremap <leader>bd :bd!<CR>
+" Source the config!
+nnoremap <leader>s :source $MYVIMRC<CR>
 " Close all tabs except current tab
 nnoremap <leader>qa :tabonly<CR>
 " Opens NNN
