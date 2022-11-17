@@ -1,4 +1,4 @@
-require'nvim-treesitter.configs'.setup {
+require 'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,
     disable = {},
@@ -16,6 +16,9 @@ require'nvim-treesitter.configs'.setup {
     "ruby",
     "svelte",
     "dart",
-    "astro"
+    "astro",
+    "elixir",
+    "eex",
+    "heex",
   },
 }

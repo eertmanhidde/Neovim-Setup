@@ -32,7 +32,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'lukas-reineke/indent-blankline.nvim'
 
   " Language Server Protocol
-  " Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'neovim/nvim-lspconfig'
   Plug 'hrsh7th/cmp-nvim-lsp'
@@ -45,6 +44,7 @@ call plug#begin('~/.vim/plugged')
 
   " Debugger
   Plug 'mfussenegger/nvim-dap'
+  Plug 'suketa/nvim-dap-ruby'
 
   " Auto pairs, example: automatically create a closing curly brace
   " when creating an opening curly brace
@@ -58,6 +58,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'nvim-telescope/telescope-file-browser.nvim'
+  Plug 'nvim-telescope/telescope-live-grep-args.nvim'
 
   " Icons for telescope
   Plug 'kyazdani42/nvim-web-devicons'
@@ -91,12 +92,23 @@ call plug#begin('~/.vim/plugged')
   " for commenting
   Plug 'numToStr/Comment.nvim'
 
+  " peek in registers
+  Plug 'gennaro-tedesco/nvim-peekup'
+
+  " For organizing notes following the zettelkasten method
+  Plug 'renerocksai/telekasten.nvim'
+  Plug 'renerocksai/calendar-vim' " Used in telekasten to display a calendar for daily notes
+
+  " Improved window managed
+  Plug 'beauwilliams/focus.nvim'
+
   " for changing stuff thats wrapped in something
   Plug 'tpope/vim-surround'
   " More godly stuff from our king TPOP
   " This plugins is for converting cases to other cases (eg. kebab-case to
   " camelCase)
   Plug 'tpope/vim-abolish'
+  Plug 'tpope/vim-unimpaired'
 
   " Plugin for running tests with VIM
   Plug 'vim-test/vim-test'
@@ -120,6 +132,9 @@ call plug#begin('~/.vim/plugged')
 
   " Flutter stuf
   Plug 'akinsho/flutter-tools.nvim'
+
+  " Reviewing PR's
+  Plug 'pwntester/octo.nvim'
 call plug#end()
 " PLUGIN - END
 
@@ -179,6 +194,9 @@ nnoremap <leader>tm :ter<CR>
 nnoremap <leader>s :source $MYVIMRC<CR>
 " Close all tabs except current tab
 nnoremap <leader>qa :tabonly<CR>
+" Unloads the current buffer from the buffer list, will fail if changes are
+" still present
+nnoremap <leader>bd :bd<CR>
 " Opens NNN
 nnoremap <leader>fm :NnnPicker %:p:h<CR>
 " Test the current file with vim-test
@@ -194,9 +212,11 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap H gT
 nnoremap L gt
-nnoremap <leader>tn :tabnew<CR>
 " Creates erb brackets because I love ERB <3
 nnoremap <leader>erb i<%=  %><esc>hhi
+
+" Opens current ticket number in URL
+nnoremap <leader>to :!ticket.sh<CR>
 
 " Refresh Widgetbook
 nnoremap <silent> <leader>fr :silent !tmux send-keys -t spotta:widgetbook r Enter<CR>

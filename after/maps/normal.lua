@@ -1,0 +1,44 @@
+-- WIP: too lazy to finish
+
+-- local map = vim.api.nvim_set_keymap
+-- local opts = { noremap = true, silent = true }
+--
+-- -- Saving a file
+-- map('n', '<Space>fs', ':w<CR>', opts)
+--
+-- -- Open terminal
+-- map('n', '<Space>tm', ':ter<CR>', opts)
+--
+-- -- Source the config!
+-- map('n', '<Space>s', ':source $MYVIMRC<CR>', opts)
+--
+-- -- Close all tabs except current tab
+-- map('n', '<Space>qa', ':tabonly<CR>', opts)
+--
+-- -- Opens NNN
+-- map('n', '<Space>fm', ':NnnPicker %:p:h<CR>', opts)
+--
+-- -- Test the current file with vim-test
+-- map('n', '<Space>tf', ':TestFile<CR>', opts)
+-- -- Test the nearest spec with vim-test
+-- map('n', '<Space>tn', ':TestNearest<CR>', opts)
+--
+-- -- Opens LazyGit
+-- map('n', '<Space>lg', ':LazyGit<CR>', opts)
+--
+-- -- Bindings for navigating
+-- map('n', '<C-h>', '<C-w>h', opts)
+-- nnoremap <C-h> <C-w>h
+-- nnoremap <C-j> <C-w>j
+-- nnoremap <C-k> <C-w>k
+-- nnoremap <C-l> <C-w>l
+-- nnoremap H gT
+-- nnoremap L gt
+-- Creates erb brackets because I love ERB <3
+-- nnoremap <leader>erb i<%=  %><esc>hhi
+
+-- Opens current ticket number in URL
+-- nnoremap <leader>to :!ticket.sh<CR>
+
+-- Refresh Widgetbook
+-- nnoremap <silent> <leader>fr :silent !tmux send-keys -t spotta:widgetbook r Enter<CR>
